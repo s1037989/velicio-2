@@ -19,8 +19,7 @@ sub websocket {
   $self->on(frame => sub {
     my ($ws, $frame) = @_;
     my ($version, $time, $uuid, $secret) = split /:/, $frame->[5];
-    $self->app->log->debug(sprintf 'I am a Manager (%s %s), an AGENT (%s) said: %s:%s:%s', $self->app, $ws->tx, $self->app->uuid, $version,$time,$secret);
-    $self->app->uuid($uuid);
+    $self->app->log->debug(sprintf 'I am a Manager (%s), an AGENT (%s) said: %s:%s:%s', $ws->tx, $uuid, $version,$time,$secret);
     #$secret='time';
     $self->tx->finish(1000 => FATAL_SECRET) and return $self->app->log->fatal(FATAL_SECRET) unless grep { $_ eq $secret } @{$self->app->secrets};
     #$version='1.01';

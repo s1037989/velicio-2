@@ -54,7 +54,7 @@ sub connect {
       });
       $self->tx->on(frame => sub {
         my ($ws, $frame) = @_;
-        $self->app->log->debug(sprintf 'I am an Agent (%s %s), my MANAGER responded: %s', $self->app, $self->tx, $frame->[5]);
+        $self->app->log->debug(sprintf 'I am an Agent (%s), my MANAGER responded: %s', $self->tx, $frame->[5]);
       });
       $self->tx->on(json => sub {
         my ($ws, $json) = @_;
